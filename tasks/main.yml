@@ -1,0 +1,8 @@
+---
+- name: Check if host is on premise or in the cloud
+  include: cloud_ssm.yml
+#  include: on_prem.yml
+#  when: on_prem == "true"
+
+#  include: cloud_ssm.yml
+#  when: on_prem == "false"

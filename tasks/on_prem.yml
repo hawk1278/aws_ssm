@@ -1,0 +1,29 @@
+---
+- name: Install SSM on Ubuntu 16 (On premise)
+  apt:
+    deb: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install SSM on Redhat Family (Amazon Linux, RHEL, and CentOS) (On premise)
+  yum: 
+    name: https://s3-us-west-1.amazonaws.com/amazon-ssm-us-west-1/latest/linux_amd64/amazon-ssm-agent.rpm
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Register and start AWS SSM
+  service: name="amazon-ssm-agent" state="started" enabled="yes"
+  when: ansible_distribution == "Centos" or ansible_distribution == "RedHat" and ansible_distribution_major_version > "6"
+
+- name: Set activation
+  command: "amazon-ssm-agent -register -y -code {{ reg_code }} -id {{ reg_id }} -region {{ reg_region }}"
+
+#- name: Start AWS SSM
+#  command: start amazon-ssm-agent
+
+  
+
+
+
+    
+
+ 

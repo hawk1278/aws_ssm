@@ -1,0 +1,6 @@
+---
+# defaults file for aws_ssm
+reg_code: "{{ lookup('env', 'REG_CODE') }}"
+reg_id: "{{ lookup('env', 'REG_ID') }}"
+reg_region: us-east-1
+on_prem: false
